@@ -344,6 +344,9 @@ class Sureflap extends utils.Adapter {
 	
         getHistoryFromApi() {
                 return /** @type {Promise<void>} */(new Promise((resolve, reject) => {
+			
+			for(let h = 0; h < this.sureFlapState.households.length; h++) {
+				var household_id = this.sureFlapState.households[h].id;
 
 				const uri = '/api/timeline/household/' + household_id + '?with=pet&page=1'
 				const options = this.buildOptions(uri, 'GET', this.sureFlapState['token']);
@@ -402,7 +405,7 @@ class Sureflap extends utils.Adapter {
 							this.setState(obj_name, trigger, trigger);
 							this.lastChange = last_movement;
 						};
-
+					};
                                         return resolve();
                                 }
                         }).catch(error => {
