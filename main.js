@@ -231,6 +231,7 @@ class Sureflap extends utils.Adapter {
 			.then(() => this.createAdapterObjectHierarchy())
 			.then(() => this.getStatus())
 			.then(() => this.getPets())
+                        .then(() => this.getHistoryFromApi())
 			.then(() => this.setUpdateTimer())
 			.catch(error => {
 				this.log.error(error);
