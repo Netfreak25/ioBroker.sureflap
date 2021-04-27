@@ -344,7 +344,7 @@ class Sureflap extends utils.Adapter {
 	
         getHistoryFromApi() {
                 return /** @type {Promise<void>} */(new Promise((resolve, reject) => {
-                        const uri = '/api/timeline/household/' + this.sureFlapState.households[0].id + '?with[]=pet&page=1'
+                        const uri = '/api/timeline/household/' + this.sureFlapState.households[0].id + '?with=pet&page=1'
                         const options = this.buildOptions(uri, 'GET', this.sureFlapState['token']);
                         this.httpRequest('get_control', options, '').then(result => {
                         var direction = "";
