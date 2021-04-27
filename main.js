@@ -36,7 +36,7 @@ class Sureflap extends utils.Adapter {
 	constructor(options) {
 		super({
 			...options,
-			name: 'sureflap',
+			name: 'sureflapmod',
 		});
 
 		// class variables
@@ -181,7 +181,7 @@ class Sureflap extends utils.Adapter {
 	 * starts loading data from the surepet API
 	 */
 	startLoadingData() {
-		this.log.debug(`starting SureFlap Adapter v1.0.5`);
+		this.log.debug(`starting SureFlap Mod Adapter v1.0.5`);
 		clearTimeout(this.timerId);
 		this.doAuthenticate()
 			.then(() => this.getHouseholdFromApi())
