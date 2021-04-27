@@ -1,9 +1,9 @@
 {
 	"common": {
-		"name": "sureflap",
-		"version": "1.0.5",
+		"name": "sureflapmod",
+		"version": "1.1.0",
 		"news": {
-			"1.0.5": {
+			"1.1.0": {
 				"en": "initial release",
 				"de": "Erstveröffentlichung",
 				"ru": "Начальная версия",
@@ -16,18 +16,18 @@
 				"zh-cn": "首次出版"
 			}
 		},
-		"title": "Sure Flap",
+		"title": "Sure Flap Mod",
 		"titleLang": {
-			"en": "Sure Flap",
-			"de": "Sure Flap",
-			"ru": "Sure Flap",
-			"pt": "Sure Flap",
-			"nl": "Sure Flap",
-			"fr": "Sure Flap",
-			"it": "Sure Flap",
-			"es": "Sure Flap",
-			"pl": "Sure Flap",
-			"zh-cn": "Sure Flap"
+			"en": "Sure Flap Mod",
+			"de": "Sure Flap Mod",
+			"ru": "Sure Flap Mod",
+			"pt": "Sure Flap Mod",
+			"nl": "Sure Flap Mod",
+			"fr": "Sure Flap Mod",
+			"it": "Sure Flap Mod",
+			"es": "Sure Flap Mod",
+			"pl": "Sure Flap Mod",
+			"zh-cn": "Sure Flap Mod"
 		},
 		"desc": {
 			"en": "Adapter for Sureflap cat und pet flap from Sure Petcare",
@@ -58,8 +58,8 @@
 		"main": "main.js",
 		"icon": "sureflap.png",
 		"enabled": true,
-		"extIcon": "https://raw.githubusercontent.com/Sickboy78/ioBroker.sureflap/master/admin/sureflap.png",
-		"readme": "https://github.com/Sickboy78/ioBroker.sureflap/blob/master/README.md",
+		"extIcon": "https://raw.githubusercontent.com/Netfreak25/ioBroker.sureflap/master/admin/sureflap.png",
+		"readme": "https://github.com/Netfreak25/ioBroker.sureflap/blob/master/README.md",
 		"loglevel": "info",
 		"mode": "daemon",
 		"type": "iot-systems",
