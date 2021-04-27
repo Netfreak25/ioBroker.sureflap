@@ -344,63 +344,68 @@ class Sureflap extends utils.Adapter {
 	
         getHistoryFromApi() {
                 return /** @type {Promise<void>} */(new Promise((resolve, reject) => {
-                        const uri = '/api/timeline/household/' + this.sureFlapState.households[0].id + '?with[]=pet&page=1'
-                        const options = this.buildOptions(uri, 'GET', this.sureFlapState['token']);
-                        this.httpRequest('get_control', options, '').then(result => {
-                        var direction = "";
-                        var created_at = "";
-                        var user_id = "";
-                        var trigger = "";
-                        var direction_name = "";
-                        var last_movement = "";
+			
+			for(let h = 0; h < this.sureFlapState.households.length; h++) {
+				var household_id = this.sureFlapState.households[h].id;
 
-                                if (result == undefined || result.data == undefined) {
-                                        return reject(new Error(`getting data failed. retrying login in 10 seconds`));
-                                } else {
-                                        direction = result.data[0]['movements'][0]['direction'];
-                                        created_at = result.data[0]['movements'][0]['created_at'];
-                                        user_id = result.data[0]['movements'][0]['user_id'];
-                                        if (user_id != null ) {
-                                                trigger = "Manuell";
-                                        } else {
-                                                trigger = "Sensor";
-                                        }
+				const uri = '/api/timeline/household/' + household_id + '?with[]=pet&page=1'
+				const options = this.buildOptions(uri, 'GET', this.sureFlapState['token']);
+				this.httpRequest('get_control', options, '').then(result => {
+				var direction = "";
+				var created_at = "";
+				var user_id = "";
+				var trigger = "";
+				var direction_name = "";
+				var last_movement = "";
+
+					if (result == undefined || result.data == undefined) {
+						return reject(new Error(`getting data failed. retrying login in 10 seconds`));
+					} else {
+						direction = result.data[0]['movements'][0]['direction'];
+						created_at = result.data[0]['movements'][0]['created_at'];
+						user_id = result.data[0]['movements'][0]['user_id'];
+						if (user_id != null ) {
+							trigger = "Manuell";
+						} else {
+							trigger = "Sensor";
+						}
 
 
-                                        if (direction == "1") {
-                                            direction_name = "Rein"
-                                        } else if (direction == "2"){
-                                            direction_name = "Raus"
-                                        } else if (direction == "0"){
-                                            direction_name = "Durch geschaut"
-                                        }
+						if (direction == "1") {
+						    direction_name = "Rein"
+						} else if (direction == "2"){
+						    direction_name = "Raus"
+						} else if (direction == "0"){
+						    direction_name = "Durch geschaut"
+						}
 
-                                        var newtime = convertTZ(created_at, "Europe/Berlin");
-                                        var newtime = newtime.toString().split(" ")
+						var newtime = convertTZ(created_at, "Europe/Berlin");
+						var newtime = newtime.toString().split(" ")
 
-                                        var time = newtime[4]
-                                        var date = newtime[2] + ". " + newtime[1] + " " + newtime[3];
+						var time = newtime[4]
+						var date = newtime[2] + ". " + newtime[1] + " " + newtime[3];
 
-                                        last_movement = date + " - " + time;
+						last_movement = date + " - " + time;
 
-                                        if ( this.lastChange != last_movement) {
-                                                var obj_name = this.sureFlapState.households[0].name  + '.last_movement';
-                                                this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement','text'));
-                                                this.setState(obj_name, "", "");
+						if ( this.lastChange != last_movement) {
+							var obj_name = this.sureFlapState.households[h].name  + '.last_movement';
+							this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement','text'));
+							this.setState(obj_name, "", "");
 
-                                                obj_name = this.sureFlapState.households[0].name  + '.last_movement.direction';
-                                                this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement direction','text'));
-                                                this.setState(obj_name, direction_name, direction_name);
+							obj_name = this.sureFlapState.households[h].name  + '.last_movement.direction';
+							this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement direction','text'));
+							this.setState(obj_name, direction_name, direction_name);
 
-                                                obj_name = this.sureFlapState.households[0].name  + '.last_movement.time';
-                                                this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement time','text'));
-                                                this.setState(obj_name, last_movement, last_movement);
+							obj_name = this.sureFlapState.households[h].name  + '.last_movement.time';
+							this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement time','text'));
+							this.setState(obj_name, last_movement, last_movement);
 
-                                                obj_name = this.sureFlapState.households[0].name  + '.last_movement.sensor';
-                                                this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement trigger','text'));
-                                                this.setState(obj_name, trigger, trigger);
-                                                this.lastChange = last_movement;
-                                        };
+							obj_name = this.sureFlapState.households[h].name  + '.last_movement.sensor';
+							this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement trigger','text'));
+							this.setState(obj_name, trigger, trigger);
+							this.lastChange = last_movement;
+						};
+					};
                                         return resolve();
                                 }
                         }).catch(error => {
