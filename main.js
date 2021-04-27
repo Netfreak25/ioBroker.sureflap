@@ -24,6 +24,10 @@ const DEVICE_TYPE_PET_FLAP = 3;
 const DEVICE_TYPE_FEEDER = 4;
 const DEVICE_TYPE_CAT_FLAP = 6;
 
+function convertTZ(date, tzString) {
+    return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));
+}
+
 class Sureflap extends utils.Adapter {
 
 	/**
