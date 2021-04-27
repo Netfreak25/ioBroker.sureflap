@@ -1,7 +1,7 @@
 {
 	"cli": true,
-	"adapterName": "sureflap",
-	"title": "Sure Flap",
+	"adapterName": "sureflapmod",
+	"title": "Sure Flap Mod",
 	"description": "Adpater für Sureflap Katzen- und Haustierklappen von Sure Petcare",
 	"keywords": [
 		"sureflap",
