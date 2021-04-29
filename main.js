@@ -392,13 +392,14 @@ class Sureflap extends utils.Adapter {
                                                 this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement direction','text'));
                                                 this.setState(obj_name, direction_name, direction_name);
 
-                                                obj_name = this.sureFlapState.households[0].name  + '.last_movement.time';
-                                                this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement time','text'));
-                                                this.setState(obj_name, last_movement, last_movement);
-
                                                 obj_name = this.sureFlapState.households[0].name  + '.last_movement.sensor';
                                                 this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement trigger','text'));
                                                 this.setState(obj_name, trigger, trigger);
+						
+                                                obj_name = this.sureFlapState.households[0].name  + '.last_movement.time';
+                                                this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement time','text'));
+                                                this.setState(obj_name, last_movement, last_movement);
+						
                                                 this.lastChange = last_movement;
                                         };
                                         return resolve();
