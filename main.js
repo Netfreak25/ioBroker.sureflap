@@ -356,9 +356,12 @@ class Sureflap extends utils.Adapter {
 
                                 if (result == undefined || result.data == undefined) {
                                         return reject(new Error(`getting data failed. retrying login in 10 seconds`));
-                                } else {
-                                        direction = result.data[0]['movements'][0]['direction'];
-                                        created_at = result.data[0]['movements'][0]['created_at'];
+                                } else {			
+					this.log.warn(`direction`);
+                                        direction = result.data[0]['movements'][0]['direction'];			
+					this.log.warn(`created_at`);
+                                        created_at = result.data[0]['movements'][0]['created_at'];			
+					this.log.warn(`user_id`);
                                         user_id = result.data[0]['movements'][0]['user_id'];
                                         if (user_id != null ) {
                                                 trigger = "Manuell";
