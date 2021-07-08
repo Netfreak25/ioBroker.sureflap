@@ -353,6 +353,7 @@ class Sureflap extends utils.Adapter {
                         var trigger = "";
                         var direction_name = "";
                         var last_movement = "";
+                        var device_id = "";
 
                                 if (result == undefined || result.data == undefined) {
                                         return reject(new Error(`getting data failed. retrying login in 10 seconds`));
@@ -363,7 +364,8 @@ class Sureflap extends utils.Adapter {
 						this.log.info(`last log entry is not a movement - skipping`);
 						return resolve();
 					}	
-					
+
+					device_id = result.data[0]['movements'][0]['device_id'];
                                         created_at = result.data[0]['movements'][0]['created_at'];
                                         user_id = result.data[0]['movements'][0]['user_id'];
                                         if (user_id != null ) {
@@ -401,11 +403,15 @@ class Sureflap extends utils.Adapter {
                                                 obj_name = this.sureFlapState.households[0].name  + '.last_movement.sensor';
                                                 this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement trigger','text'));
                                                 this.setState(obj_name, trigger, trigger);
-						
+
                                                 obj_name = this.sureFlapState.households[0].name  + '.last_movement.time';
                                                 this.setObjectNotExists(obj_name, this.buildStateObject('Shows last movement time','text'));
                                                 this.setState(obj_name, last_movement, last_movement);
-						
+
+                                                obj_name = this.sureFlapState.households[0].name  + '.last_movement.device_id';
+                                                this.setObjectNotExists(obj_name, this.buildStateObject('Shows last device id','text'));
+                                                this.setState(obj_name, device_id, device_id);
+
                                                 this.lastChange = last_movement;
                                         };
                                         return resolve();
