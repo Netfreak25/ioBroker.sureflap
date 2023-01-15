@@ -205,6 +205,7 @@ class Sureflap extends utils.Adapter {
 				this.sureFlapState['token'] = token;
 				this.setConnectionStatusToAdapter(true);
 				this.log.info(`connected`);
+				this.log.debug(token);
 				return resolve();
 			}).catch(error => {
 				return reject(error);
@@ -344,8 +345,8 @@ class Sureflap extends utils.Adapter {
 	
         getHistoryFromApi() {
                 return /** @type {Promise<void>} */(new Promise((resolve, reject) => {
-                        const uri = '/api/timeline/household/' + this.sureFlapState.households[0].id + '?with=pet&page=1'
-			this.log.info(uri);
+                        const uri = '/api/timeline/household/' + this.sureFlapState.households[0].id + '?page=1&page_size=1'
+			this.log.debug(uri);
                         const options = this.buildOptions(uri, 'GET', this.sureFlapState['token']);
                         this.httpRequest('get_control', options, '').then(result => {
                         var direction = "";
